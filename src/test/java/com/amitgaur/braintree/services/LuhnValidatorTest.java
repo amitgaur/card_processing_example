@@ -1,7 +1,5 @@
 package com.amitgaur.braintree.services;
 
-import com.amitgaur.braintree.model.com.amitgaur.braintree.services.CardValidator;
-import com.amitgaur.braintree.model.com.amitgaur.braintree.services.LuhnValidator;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;

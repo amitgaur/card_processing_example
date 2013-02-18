@@ -1,34 +1,26 @@
 package com.amitgaur.braintree.model;
 
-import com.amitgaur.braintree.model.com.amitgaur.braintree.services.CardValidator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
- * Created with IntelliJ IDEA.
- * User: amitgaur
- * Date: 2/14/13
- * Time: 12:42 PM
- * To change this template use File | Settings | File Templates.
+ * Basic Representation of a Credit Card Object
+ *
  */
-public class CreditCard {
+public abstract class CreditCard {
 
-    private final String cardNumber;
-    private final String cardHolderName;
-    private BigDecimal balance;
-    private BigDecimal creditLimit;
-    private boolean isValid;
+    protected final String cardNumber;
+    protected final String cardHolderName;
+    protected BigInteger balance;
+    protected BigInteger creditLimit;
+    protected boolean isValid;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreditCard.class);
 
-    public CreditCard(String cardNumber, String cardHolderName, BigDecimal creditLimit, CardValidator cardValidator) {
-        this.cardNumber = cardNumber;
+    public CreditCard(String cardHolderName, String cardNumber, BigInteger creditLimit) {
         this.cardHolderName = cardHolderName;
+        this.cardNumber = cardNumber;
         this.creditLimit = creditLimit;
-        this.balance = BigDecimal.ZERO;
-        this.isValid = cardValidator.validate(cardNumber);
+        this.balance = BigInteger.ZERO;
     }
 
     public String getCardNumber(){
@@ -38,32 +30,35 @@ public class CreditCard {
         return  cardHolderName;
     }
 
-
-
-    public BigDecimal getBalance() {
+    public BigInteger getBalance() {
         return balance;
     }
 
-    public synchronized  boolean charge(BigDecimal chargeAmount) {
-        boolean success = true;
-        if (balance.add(chargeAmount).compareTo(creditLimit)>0) {
-                       LOGGER.info("Balance has fallen below credit limit for request ::" + chargeAmount + " cardDetails::" + this.toString());
-                               success = false;
-        }
-        else {
-            balance = balance.add(chargeAmount);
-        }
-        return success;
+    public boolean isValid() {
+        return isValid;
     }
 
-    public synchronized  void credit(BigDecimal creditAmount){
-        balance = balance.subtract(creditAmount);
-    }
+    /**
+     * @param chargeAmount Debit the amount from the card
+     * @return true if the balance does not cross the limit of the card
+     *
+     *
+     */
+    public abstract   boolean debit(BigInteger chargeAmount);
+
+
+    /**
+     * Credit an amount the card
+     * @param creditAmount
+     */
+    public abstract  void credit(BigInteger creditAmount);
+
+    public abstract String prettyPrint();
 
 
     public String toString() {
 
         StringBuilder builder = new StringBuilder();
-       return builder.append("CardNum::").append(cardNumber).append(" CardHolder::").append(cardHolderName).append(" balance::").append(balance).append(" limit::").append(creditLimit).toString();
+        return builder.append("CardNum::").append(cardNumber).append(" CardHolder::").append(cardHolderName).append(" balance::").append(balance).append(" limit::").append(creditLimit).toString();
     }
 }
