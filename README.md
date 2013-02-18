@@ -1,49 +1,31 @@
-Basic Credit Card Processing
-----------------------------
+Choice of language
+Java : I am most well versed in programming in Java and hence it was the language of choice for me.
+Maven : Dependency management/packaging works well
 
-Imagine that you're writing software for a credit card provider.  Implement a program that will add new credit card accounts, process charges and credits against them, and display summary information.
 
-Requirements:
-- three input commands must be handled, passed with space delimited arguments, via stdin or a file passed on the command line
- - "Add" will create a new credit card for a given name, card number, and limit
-   - Card numbers should be validated using Luhn 10
-   - New cards start with a $0 balance
- - "Charge" will increase the balance of the card associated with the provided name by the amount specified
-   - Charges that would raise the balance over the limit are ignored as if they were declined
-   - Charges against Luhn 10 invalid cards are ignored
- - "Credit" will decrease the balance of the card associated with the provided name by the amount specified
-   - Credits that would drop the balance below $0 will create a negative balance
-   - Credits against Luhn 10 invalid cards are ignored
-- when all input has been read and processed, a summary should be generated and written to stdout
- - the summary should include the name of each person followed by a colon and balance
- - the names should be displayed alphabetically
- - display "error" instead of the balance if the credit card number does not pass Luhn 10
+Requirements for runinng the solution
+1. Requirement : Java and Maven installed on the running machine
+2. MVN_HOME and JAVA_HOME variables set
+3. Run mvn verify in the directory to validate Maven setup
 
-Input Assumptions:
-- all input will be space delimited
-- credit card numbers may vary in length, up to 19 characters
-- credit card numbers will always be numeric
-- amounts will always be prefixed with "$" and will be in whole dollars (no decimals)
 
-Example Input:
+Running the solution
+1. To run in the command line option mode  run the following command on the prompt in the base directory
+mvn  exec:java -Dexec.mainClass="com.amitgaur.braintree.application.ApplicationMain"
+a) Input the line items and the stdin input can be terminate with a "Done" or an empty line 
 
-Add Tom 4111111111111111 $1000
-Add Lisa 5454545454545454 $3000
-Add Quincy 1234567890123456 $2000
-Charge Tom $500
-Charge Tom $800
-Charge Lisa $7
-Credit Lisa $100
-Credit Quincy $200
+2. To run in file parsing option mode, run the following command on the prompt
+mvn  exec:java -Dexec.mainClass="com.amitgaur.braintree.application.ApplicationMain" -Dexec.args="-filepath <path to file>"
+The <path to file> must be the fully qualified path name of the file on disk
 
-Example Output:
 
-Lisa: $-93
-Quincy: error
-Tom: $500
+3. Logging : The app creates a log file in log/application.log that contains errors/status information on processing. 
 
-Implement your solution in any programming language.  If you wrote tests,
-include them with your submission.  Also, please provide a README with why
-you picked the programming language you used for the solution.
 
-***Note: this information is confidential. It is prohibited to share, post online or otherwise publicize without Braintree's prior written consent.
+Shortcomings
+1. I could have written more tests, test coverage is not ideal
+2. I would have liked to use a dependency injection framework to bootstrap the application
+3. Scalability : All items are read into memory : if the file is really large, the app can run out of out of memory errors
+
+
+

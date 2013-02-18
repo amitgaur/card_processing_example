@@ -37,7 +37,7 @@ public class ApplicationMain {
     private static void processCmdlineArgs(String[] args) throws ParseException {
         Options commandLineOptions = new Options();
         commandLineOptions.addOption(HELP_OPT, false, "help with command invocation");
-        commandLineOptions.addOption(FILE_PATH_OPT, false,
+        commandLineOptions.addOption(FILE_PATH_OPT, true,
                 "Complete file path of file to be parsed");
 
 
@@ -55,18 +55,25 @@ public class ApplicationMain {
         LineSplitter lineSplitter = new LineSplitter(cardManager);
 
         if (cmLine.hasOption(FILE_PATH_OPT)) {
+
             String fileName = cmLine.getOptionValue(FILE_PATH_OPT);
+            if (fileName == null || fileName.length() == 0) {
+                System.out.println("**** Error : Invalid file name please run again**** ");
+                return;
+            }
+            LOG.info("Processing file {}", fileName);
             processFile(lineSplitter, fileName);
 
         } else {
             try {
+                LOG.info("Processing via command line args");
                 processViaStdin(lineSplitter);
             } catch (IOException e) {
                 LOG.error("Error processing input from stdin");
             }
         }
 
-        System.out.println("\n");
+        System.out.println("*** Creating output *** \n");
         for (CreditCard card : cardManager.getCards()) {
             System.out.println(card.prettyPrint());
         }
@@ -84,13 +91,14 @@ public class ApplicationMain {
 
     protected static void processFile(LineSplitter lineSplitter, String fileName) {
         FileParser parser = new FileParser(fileName, lineSplitter);
+        parser.process();
     }
 
     protected static void processViaStdin(LineSplitter lineSplitter) throws IOException {
-        System.out.println("Please start entering the data");
+        System.out.println("Please start entering the data,  to Exit type in 'Done' or Enter  on a  new line");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
-        while ((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null && !line.equalsIgnoreCase("Done") && !line.trim().equals("")) {
             lineSplitter.action(line);
         }
         System.out.println("Done processing input ");

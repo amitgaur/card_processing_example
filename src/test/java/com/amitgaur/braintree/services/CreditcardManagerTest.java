@@ -40,19 +40,19 @@ public class CreditCardManagerTest {
 
         Assert.assertTrue(cardManager.getCards().size() == 3);
 
-        cardManager.chargeCard("Tom", BigInteger.valueOf(500), ChargeType.CREDIT);
+        cardManager.chargeCard("Tom", BigInteger.valueOf(500), ChargeType.CHARGE);
         CreditCard tomCard = cardManager.getCard("Tom");
         Assert.assertTrue(tomCard.getBalance().equals(BigInteger.valueOf(500)));
-        cardManager.chargeCard("Tom", BigInteger.valueOf(800), ChargeType.CREDIT);
+        cardManager.chargeCard("Tom", BigInteger.valueOf(800), ChargeType.CHARGE);
         Assert.assertTrue(tomCard.getBalance().equals(BigInteger.valueOf(500)));
 
 
 
 
         CreditCard lisaCard = cardManager.getCard("Lisa");
-        cardManager.chargeCard("Lisa", BigInteger.valueOf(7), ChargeType.CREDIT);
+        cardManager.chargeCard("Lisa", BigInteger.valueOf(7), ChargeType.CHARGE);
         Assert.assertTrue(lisaCard.getBalance().equals(BigInteger.valueOf(7)));
-        cardManager.chargeCard("Lisa", BigInteger.valueOf(100), ChargeType.CHARGE);
+        cardManager.chargeCard("Lisa", BigInteger.valueOf(100), ChargeType.CREDIT);
         Assert.assertTrue(lisaCard.getBalance().equals(BigInteger.valueOf(-93)));
 
 

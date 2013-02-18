@@ -13,7 +13,7 @@ public class InvalidCreditCard extends CreditCard {
     }
 
     @Override
-    public boolean debit(BigInteger chargeAmount) {
+    public boolean charge(BigInteger chargeAmount) {
         throw new UnsupportedOperationException();
 
     }

@@ -5,13 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * Created with IntelliJ IDEA.
- * User: amitgaur
- * Date: 2/14/13
- * Time: 1:19 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class LuhnValidatorTest {
 
     CardValidator validator;

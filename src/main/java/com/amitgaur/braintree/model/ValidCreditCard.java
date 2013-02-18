@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 /**
  * Credit Card that passes Validation Algorithm
- * Supports credit and debit functions
+ * Supports credit and charge functions
  */
 public class ValidCreditCard extends CreditCard   {
 
@@ -19,7 +19,7 @@ public class ValidCreditCard extends CreditCard   {
     }
 
     @Override
-    public synchronized  boolean debit(BigInteger chargeAmount) {
+    public synchronized  boolean charge(BigInteger chargeAmount) {
         boolean success = true;
         if (balance.add(chargeAmount).compareTo(creditLimit)>0) {
             LOGGER.info("Balance has fallen below credit limit for request ::" + chargeAmount + " cardDetails::" + this.toString());

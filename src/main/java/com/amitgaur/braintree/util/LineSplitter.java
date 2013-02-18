@@ -37,7 +37,8 @@ public class LineSplitter {
         String[] elements = split(line);
         if (elements.length < 3 || elements.length > 4) {
 
-            LOGGER.warn("Invalid line, skipping parsing", line);
+            LOGGER.warn("Invalid line, skipping parsing {}", line);
+            return;
         }
 
         String action = elements[0];
@@ -45,7 +46,7 @@ public class LineSplitter {
             creditCardManager.addCard(elements[1], elements[2], parseBigInteger(elements[3]));
         } else if (action.equalsIgnoreCase("CHARGE")) {
             creditCardManager.chargeCard(elements[1], parseBigInteger(elements[2]), ChargeType.CHARGE);
-        } else if (action.equalsIgnoreCase("CHARGE")) {
+        } else if (action.equalsIgnoreCase("CREDIT")) {
             creditCardManager.chargeCard(elements[1], parseBigInteger(elements[2]), ChargeType.CREDIT);
         }
 

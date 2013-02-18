@@ -44,7 +44,7 @@ public abstract class CreditCard {
      *
      *
      */
-    public abstract   boolean debit(BigInteger chargeAmount);
+    public abstract   boolean charge(BigInteger chargeAmount);
 
 
     /**

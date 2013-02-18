@@ -37,10 +37,10 @@ public class CreditCardManagerImpl implements CreditCardManager {
         if (card != null && card.isValid()) {
             switch (chargeType) {
                 case CHARGE:
-                    card.credit(amount);
+                    card.charge(amount);
                     break;
                 case CREDIT:
-                    card.debit(amount);
+                    card.credit(amount);
                     break;
             }
 
