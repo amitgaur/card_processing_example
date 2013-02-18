@@ -17,6 +17,8 @@ a) Input the line items and the stdin input can be terminate with a "Done" or an
 2. To run in file parsing option mode, run the following command on the prompt
 mvn  exec:java -Dexec.mainClass="com.amitgaur.braintree.application.ApplicationMain" -Dexec.args="-filepath <path to file>"
 The <path to file> must be the fully qualified path name of the file on disk
+eg. 
+mvn package exec:java -Dexec.mainClass="com.amitgaur.braintree.application.ApplicationMain" -Dexec.args="-filepath card_data.txt"
 
 
 3. Logging : The app creates a log file in log/application.log that contains errors/status information on processing. 
