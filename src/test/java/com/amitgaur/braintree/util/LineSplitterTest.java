@@ -1,16 +1,23 @@
 package com.amitgaur.braintree.util;
 
 
+import com.amitgaur.braintree.services.CreditCardManager;
+import org.mockito.Mockito;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.math.BigInteger;
+
 public class LineSplitterTest {
+    LineSplitter lineSplitter ;
+
 
     @Test
-    public void testSuccess() {
+    public void testParsingBigInteger() {
 
-        String line = "Add Tom 4111111111111111 $1000";
-
-
+        lineSplitter  = new LineSplitter(Mockito.mock(CreditCardManager.class));
+        BigInteger value = lineSplitter.parseBigInteger("$1000");
+        Assert.assertEquals(value, BigInteger.valueOf(1000));
 
 
     }

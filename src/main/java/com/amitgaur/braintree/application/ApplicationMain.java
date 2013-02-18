@@ -24,12 +24,9 @@ public class ApplicationMain {
 
     public static void main(String... args) {
         try {
-
             processCmdlineArgs(args);
         } catch (ParseException e) {
-
-
-            System.out.println("Error processing args");
+            System.out.println("Error processing args : " + e.getStackTrace());
             System.exit(1);
         }
     }
@@ -95,13 +92,13 @@ public class ApplicationMain {
     }
 
     protected static void processViaStdin(LineSplitter lineSplitter) throws IOException {
-        System.out.println("Please start entering the data,  to Exit type in 'Done' or Enter  on a  new line");
+        System.out.println(" *** Please start entering the data,  to Exit type in 'Done' or Enter  on a  new line ***");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
         while ((line = reader.readLine()) != null && !line.equalsIgnoreCase("Done") && !line.trim().equals("")) {
             lineSplitter.action(line);
         }
-        System.out.println("Done processing input ");
+        System.out.println("***  Done processing input *** ");
 
     }
 }

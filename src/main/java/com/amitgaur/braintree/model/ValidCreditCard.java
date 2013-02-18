@@ -9,30 +9,29 @@ import java.math.BigInteger;
  * Credit Card that passes Validation Algorithm
  * Supports credit and charge functions
  */
-public class ValidCreditCard extends CreditCard   {
+public class ValidCreditCard extends CreditCard {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ValidCreditCard.class);
 
     public ValidCreditCard(String cardHolderName, String cardNumber, BigInteger balance) {
-        super(cardHolderName, cardNumber,balance);
+        super(cardHolderName, cardNumber, balance);
         this.isValid = true;
     }
 
     @Override
-    public synchronized  boolean charge(BigInteger chargeAmount) {
+    public synchronized boolean charge(BigInteger chargeAmount) {
         boolean success = true;
-        if (balance.add(chargeAmount).compareTo(creditLimit)>0) {
+        if (balance.add(chargeAmount).compareTo(creditLimit) > 0) {
             LOGGER.info("Balance has fallen below credit limit for request ::" + chargeAmount + " cardDetails::" + this.toString());
             success = false;
-        }
-        else {
+        } else {
             balance = balance.add(chargeAmount);
         }
         return success;
     }
 
     @Override
-    public synchronized  void credit(BigInteger creditAmount){
+    public synchronized void credit(BigInteger creditAmount) {
         balance = balance.subtract(creditAmount);
     }
 

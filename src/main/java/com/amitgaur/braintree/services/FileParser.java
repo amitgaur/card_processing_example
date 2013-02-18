@@ -9,11 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: amitgaur
- * Date: 2/15/13
- * Time: 9:50 AM
- * To change this template use File | Settings | File Templates.
+ * Parses File based input
  */
 public class FileParser {
 
@@ -28,35 +24,30 @@ public class FileParser {
         this.lineSplitter = lineSplitter;
 
 
-
     }
 
-    public void process()                       {
+    public void process() {
         BufferedReader reader = null;
-        try{
-             reader = new BufferedReader(new FileReader(fileLocation));
-             String line = null;
-             while ((line = reader.readLine())!= null){
-                 lineSplitter.action(line);
-             }
+        try {
+            reader = new BufferedReader(new FileReader(fileLocation));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                lineSplitter.action(line);
+            }
 
-        }
-        catch (IOException e){
-                      LOG.error("Error processing file {} with exception {}", fileLocation, e) ;
-        }
-        finally {
+        } catch (IOException e) {
+            LOG.error("Error processing file {} with exception {}", fileLocation, e);
+        } finally {
             if (reader != null) {
-                try{
+                try {
                     reader.close();
-                }
-                catch(IOException e){
-                    LOG.error("Error closing file {} with exception {}", fileLocation, e)  ;
+                } catch (IOException e) {
+                    LOG.error("Error closing file {} with exception {}", fileLocation, e);
                 }
 
             }
         }
     }
-
 
 
 }

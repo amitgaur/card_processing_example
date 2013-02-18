@@ -1,11 +1,7 @@
 package com.amitgaur.braintree.model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: amitgaur
- * Date: 2/15/13
- * Time: 8:15 AM
- * To change this template use File | Settings | File Templates.
+ * Charge Types supported on the card
  */
 public enum ChargeType {
     CHARGE,    //Charge  to the card

@@ -10,12 +10,11 @@ import java.math.BigInteger;
 import java.util.regex.Pattern;
 
 /**
- * Class that parses each line item and actions processing appropriately
+ * Class that parses each input line item and actions processing appropriately
  * supports
  * 1. Add Card
  * 2. Charge Card
  * 3. Credit Card
- *
  */
 public class LineSplitter {
 
